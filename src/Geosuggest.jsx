@@ -88,6 +88,14 @@ class Geosuggest extends React.Component {
   }
 
   /**
+   * Whether or not it is hidden
+   * @return {Boolean} Hidden or not?
+   */
+  isHidden() {
+    return this.state.isSuggestsHidden || this.state.suggests.length === 0;
+  }
+
+  /**
    * When the input changed
    * @param {String} userInput The input value of the user
    */
@@ -390,9 +398,10 @@ class Geosuggest extends React.Component {
       input = <Input className={this.props.inputClassName}
         ref='input'
         value={this.state.userInput}
-        ignoreEnter={!this.state.isSuggestsHidden}
         ignoreTab={this.props.ignoreTab}
         style={this.props.style.input}
+        submitOnEnter={this.props.submitOnEnter}
+        suggestActive={!this.isHidden()}
         onChange={this.onInputChange}
         onFocus={this.onInputFocus}
         onBlur={this.onInputBlur}
@@ -401,7 +410,7 @@ class Geosuggest extends React.Component {
         onPrev={this.onPrev}
         onSelect={this.onSelect}
         onEscape={this.hideSuggests} {...attributes} />,
-      suggestionsList = <SuggestList isHidden={this.state.isSuggestsHidden}
+      suggestionsList = <SuggestList isHidden={this.isHidden()}
         style={this.props.style.suggests}
         suggestItemStyle={this.props.style.suggestItem}
         suggestsClassName={this.props.suggestsClassName}

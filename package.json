@@ -47,7 +47,7 @@
     "uglifyjs": "^2.4.10"
   },
   "scripts": {
-    "prepublish": "npm run build:module",
+    "prepare": "npm run build:module",
     "lint": "eslint ./src/*.jsx ./src/*.js ./example/src ./test/*.jsx ./test/*.js ./test/fixtures",
     "pretest": "npm run lint",
     "test": "nyc --include 'src/*' -e .jsx -s npm run unit-test && npm run report",
